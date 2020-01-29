@@ -62,7 +62,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button:
-                new Thread(new MyThread(this.myhandler)).start();
+                new Thread(new MyThread(this.myhandler,"USD","CNY")).start();
+                break;
+            case R.id.text:
                 break;
         }
     }
@@ -71,9 +73,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 class MyThread implements Runnable {
 
     private MainActivity.MyHandler handler;
+    private String scur;
+    private String tcur;
 
-    MyThread(MainActivity.MyHandler handler) {
+    MyThread(MainActivity.MyHandler handler,String scur,String tcur) {
         this.handler = handler;
+        this.scur = scur;
+        this.tcur = tcur;
     }
 
     /**
@@ -90,7 +96,7 @@ class MyThread implements Runnable {
     @Override
     public void run() {
         try {
-            URL url = new URL("https://sapi.k780.com/?app=finance.rate&scur=USD&tcur=CNY&appkey=48354&sign=d230033184e2441d03e0e5dc572fbc57&format=json");
+            URL url = new URL("https://sapi.k780.com/?app=finance.rate&"+"scur="+scur+"&tcur="+tcur+"&appkey=48354&sign=d230033184e2441d03e0e5dc572fbc57&format=json");
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setConnectTimeout(3000);
