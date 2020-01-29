@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 MainActivity.msgstr = msgstr.concat((String)msg.obj);
                 MainActivity.textView.setText(msgstr);
             }
+
         }
     }
 
