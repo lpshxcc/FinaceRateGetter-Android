@@ -1,4 +1,7 @@
 package com.example.mydemo;
+/**
+ * @Author LPSH
+ */
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,15 +25,11 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button button;
+    //I did not found a better solution to solve memory leak
     static TextView textView;
     static String msgstr;
 
     public static class MyHandler extends Handler {
-        /**
-         * Subclasses must implement this to receive messages.
-         *
-         * @param msg
-         */
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
@@ -53,11 +52,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    /**
-     * Called when a view has been clicked.
-     *
-     * @param v The view that was clicked.
-     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -81,18 +75,6 @@ class MyThread implements Runnable {
         this.scur = scur;
         this.tcur = tcur;
     }
-
-    /**
-     * When an object implementing interface <code>Runnable</code> is used
-     * to create a thread, starting the thread causes the object's
-     * <code>run</code> method to be called in that separately executing
-     * thread.
-     * <p>
-     * The general contract of the method <code>run</code> is that it may
-     * take any action whatsoever.
-     *
-     * @see Thread#run()
-     */
     @Override
     public void run() {
         try {
@@ -116,7 +98,6 @@ class MyThread implements Runnable {
             message.obj = string;
             message.what = 1;
             this.handler.sendMessage(message);
-            //将返回的数据分析
 
         } catch (Exception e) {
             e.printStackTrace();
