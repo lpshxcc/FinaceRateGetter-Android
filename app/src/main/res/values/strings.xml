@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MyDemo</string>
+    <string name="default_text">汇率：</string>
+    <string name="default_button">GET</string>
+</resources>
