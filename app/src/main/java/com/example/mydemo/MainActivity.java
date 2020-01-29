@@ -34,7 +34,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
             if (msg.what == 1) {
-                MainActivity.msgstr = (String) msg.obj;
+                msgstr = textView.getText().toString();
+                MainActivity.msgstr = msgstr.concat((String)msg.obj);
                 MainActivity.textView.setText(msgstr);
             }
         }
