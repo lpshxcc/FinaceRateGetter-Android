@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             super.handleMessage(msg);
             if (msg.what == 1) {
                 MainActivity.msgstr = (String) msg.obj;
-                textView.setText(msgstr);
+                MainActivity.textView.setText(msgstr);
             }
         }
     }
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         this.button = findViewById(R.id.button);
         button.setOnClickListener(this);
-        this.textView = findViewById(R.id.text);
+        textView = findViewById(R.id.text);
 
     }
 
@@ -63,15 +63,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.button:
                 new Thread(new MyThread(this.myhandler)).start();
+                break;
         }
     }
 }
-class MyThread implements Runnable{
 
-    MainActivity.MyHandler handler;
-    MyThread(MainActivity.MyHandler handler){
+class MyThread implements Runnable {
+
+    private MainActivity.MyHandler handler;
+
+    MyThread(MainActivity.MyHandler handler) {
         this.handler = handler;
     }
+
     /**
      * When an object implementing interface <code>Runnable</code> is used
      * to create a thread, starting the thread causes the object's
@@ -103,7 +107,7 @@ class MyThread implements Runnable{
             String string = (String) jsonObject1.get("rate");
 
             Message message = this.handler.obtainMessage();
-            message.obj = (Object) string;
+            message.obj = string;
             message.what = 1;
             this.handler.sendMessage(message);
             //将返回的数据分析
@@ -111,7 +115,7 @@ class MyThread implements Runnable{
         } catch (Exception e) {
             e.printStackTrace();
             Message msg = this.handler.obtainMessage();
-            msg.obj = (Object) "ERROR";
+            msg.obj = "ERROR";
             msg.what = 1;
             this.handler.sendMessage(msg);
         }
